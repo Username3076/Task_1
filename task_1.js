@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.7
+ * @version 1.6.8
  */
 
  main() // main methode
@@ -138,19 +138,31 @@ function createSectionArray(pIsInsideArray){
 function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
     
     var sectionCounter = 0 // this counter shows at which section the algorithm is
-    var startAndEndOfSection = [route[0]]
+  
+  
+    // var firstRow = [route0]      // this section was supposed to be used for the table in the html-page
+   // var secondRow = []
     
     for(let i=0; i<pIsInsideArray.length-2; i++) {
         if (pIsInsideArray[i] != pIsInsideArray[i+1]) { // whenever there is a switch from true to false or vise versa, the counter increases to the next section
             sectionCounter ++
 
-            startAndEndOfSection.push(route[i])
-            startAndEndOfSection.push(route[i+1])
+            //firstRow.push(route[i])         //this section was supposed to be used for the table in the html-page
+            //secondRow.push(route[i+1])
 
         }
         else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
-     
+
+    // secondRow.push(route[pIsInsideArray.length-1])  to be used for the table in the html-page
+
+     /**
+      * var table = [[],[],[],[]]
+     table[0].push(in_sectionArray)
+     table[1].push(rowOneArray)                     // this section was supposed to be used for the table on the html-page
+     table[2].push(rowTwoArray)
+     tableArray[3].push()
+     */
      var sum = 0 // variable which I use, to sum up all distances in the sectionArray
      
      for(let j = 0; j<sectionArray.length-1;j++){ // itterate through sectionArray and add every entry to sum
