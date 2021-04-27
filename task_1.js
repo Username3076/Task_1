@@ -16,6 +16,9 @@
      var distanceArray = createDistanceArray(sectionArray, route, isInsideArray)
      console.log(distanceArray)
 
+     var sortedDistanceArray = bubble(distanceArray)
+     console.log(sortedDistanceArray)
+
  }
 
 /**
@@ -114,7 +117,7 @@ function createSectionArray(pIsInsideArray){
     }
     console.log(sections)
     var sectionArray = [0]
-    for(let j = 0; j<sections-1;j++){       // new array is created and as big, as there are sections
+    for(let j = 0; j<sections;j++){       // new array is created and as big, as there are sections plus 1 to sum every entry up in the final array spot
         sectionArray.push(0)
     } 
     
@@ -139,5 +142,33 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
         }
         else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
+     
+     var sum = 0 // variable which has the sum of all entries in the sectionArray
+     
+     for(let j = 0; j<sectionArray.length-1;j++){ // itterate through sectionArray and add every entry to sum
+
+            sum += sectionArray[j]
+     }
+
+     sectionArray[sectionCounter+1] = sum // the last spot in the sectionArray gets filled with sum
+
     return sectionArray // the filled array gets returned
 }
+
+/**
+ * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
+ * @function bubbleSort
+ * @param {Array} distanceArray - the Array with the distances 
+ * @returns {Array} distanceArray - the distanceArray gets returned but by the use of the bubblesort algorithm, it is now sorted
+ */
+function bubble(distanceArray) {
+    for (var i = 0; i < distanceArray.length; i++) {
+      if (distanceArray[i] > distanceArray[i + 1]) {
+        var a = distanceArray[i]
+        var b = distanceArray[i + 1]
+        distanceArray[i] = b
+        distanceArray[i + 1] = a
+      }
+    }
+    return distanceArray;
+  }
