@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.2
+ * @version 1.6.3
  */
 
  main() // main methode
@@ -120,7 +120,7 @@ function createSectionArray(pIsInsideArray){
 
     var sectionArray = [0]
 
-    for(let j = 0; j<sections;j++){       // new array is created and as big, as there are sections plus 1 to sum every entry up in the final array spot
+    for(let j = 0; j<sections; j++){       // new array is created and as big, as there are sections plus 1 to sum every entry up in the final array spot
         sectionArray.push(0)
     } 
     
