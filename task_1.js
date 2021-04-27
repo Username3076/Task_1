@@ -138,10 +138,15 @@ function createSectionArray(pIsInsideArray){
 function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
     
     var sectionCounter = 0 // this counter shows at which section the algorithm is
+    var startAndEndOfSection = [route[0]]
     
     for(let i=0; i<pIsInsideArray.length-2; i++) {
         if (pIsInsideArray[i] != pIsInsideArray[i+1]) { // whenever there is a switch from true to false or vise versa, the counter increases to the next section
             sectionCounter ++
+
+            startAndEndOfSection.push(route[i])
+            startAndEndOfSection.push(route[i+1])
+
         }
         else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
