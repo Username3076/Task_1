@@ -62,11 +62,9 @@ function distanceTwoPoints(point1, point2){
     const distance = R * b // in the end, we use our const b and multiply it with the earth`s radius to get the distance of our two points
 
     return distance // I return the calculated distance of our 2 points
- }
+}
 
- 
-
- /**
+/**
   * function "createIsInsideArray" creates an Array, which is as long as the original array of points, that was used for the route.
   * In this Array every index is filled with the return of the "isInsidePolygon" function, so we can see for every point in the route, if it is inside or outside of the polygon.
   * @function createIsInsideArray
@@ -74,7 +72,7 @@ function distanceTwoPoints(point1, point2){
   * @param {Array} pPolygon - the polygon, saved in an array
   * @returns {Array} isInsideArray - the returned array
   */
- function createIsInsideArray(pRoute, pPolygon){
+function createIsInsideArray(pRoute, pPolygon){
      
     var isInsideArray = [pRoute.length] // I create an array, which is as long as the route array
 
@@ -83,15 +81,15 @@ function distanceTwoPoints(point1, point2){
     }
 
     return isInsideArray // das gefüllte array wird zurückgegeben
- }
+}
 
- /**
-  * function "createSectionArray" is used to count, how many different sections between beeing inside and outside the polygon there are and to create an array with this exact size.
-  * @function createSectionArray
-  * @param {Array} pIsInsideArray - this array is taken from the function "createIsInsideArray" and used to count the sections 
-  * @returns {Array} sectionArray - this array is as big as there are sections
-  */
- function createSectionArray(pIsInsideArray){
+/**
+ * function "createSectionArray" is used to count, how many different sections between beeing inside and outside the polygon there are and to create an array with this exact size.
+ * @function createSectionArray
+ * @param {Array} pIsInsideArray - this array is taken from the function "createIsInsideArray" and used to count the sections 
+ * @returns {Array} sectionArray - this array is as big as there are sections
+ */
+function createSectionArray(pIsInsideArray){
     
     var sections = 1 // this variable counts how many sections there are
     
@@ -104,5 +102,22 @@ function distanceTwoPoints(point1, point2){
     var sectionArray = [sections] // new array is created and as big, as there are sections
     
     return sectionArray // the new array gets returned
- }
+}
+
+ /**
+  * function "createDistanceArray" takes the array from "createSectionArray" and fills it with distances by using the method "distanceTwoPoints"
+  * @function createDistanceArray 
+  * @param {Array} sectionArray - array from the function "createSectionArray"
+  * @returns {Array} sectionArray - array, filled with the corresponding distances
+  */
+function createDistanceArray(sectionArray){
+    var sectionCounter = 0 // this counter shows at which section the algorithm is
+    for(let i=0; i<pIsInsideArray.length-2; i++) {
+        if (pIsInsideArray[i] != pIsInsideArray[i+1]) { // whenever there is a switch from true to false or vise versa, the counter increases to the next section
+            sectionCounter ++
+        }
+        else sectionArray[sectionCounter]+=distanceTwoPoints(sectionArray[i], sectionArray[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
+     }
+     return sectionArray // the filled array gets returned
+}
 
