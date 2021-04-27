@@ -18,7 +18,7 @@ function isPointInPolygon(pPoint, pPolygon){
     let x = pPoint[0] // longitude
     let y = pPoint[1] // lattidude
 
-    for (var i = 0, j = in_polygon.length - 1; i < pPolygon.length; j = i++) { // I itterate trough the entire polygon
+    for (var i = 0, j = pPolygon.length - 1; i < pPolygon.length; j = i++) { // I itterate trough the entire polygon
         var xi = pPolygon[i][0] //longitude i
         var yi = pPolygon[i][1] //latitude  i
         var xj = pPolygon[j][0] //longitude j
@@ -94,6 +94,7 @@ function createSectionArray(pIsInsideArray){
     var sections = 1 // this variable counts how many sections there are
     
     for(let i=0; i<pIsInsideArray.length-2; i++) {  // this loop iterates through the pIsInsideArray and inscreases the sections counter by one, whenever there is a switch from true to false or vise versa
+        
         if (pIsInsideArray[i] != pIsInsideArray[i+1]) {
             sections++
         }
@@ -108,16 +109,19 @@ function createSectionArray(pIsInsideArray){
   * function "createDistanceArray" takes the array from "createSectionArray" and fills it with distances by using the method "distanceTwoPoints"
   * @function createDistanceArray 
   * @param {Array} sectionArray - array from the function "createSectionArray"
+  * @param {Array} pRoute - array with all the points
+  * @param {Array} pIsInsideArray
   * @returns {Array} sectionArray - array, filled with the corresponding distances
   */
-function createDistanceArray(sectionArray){
+function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
+    
     var sectionCounter = 0 // this counter shows at which section the algorithm is
+    
     for(let i=0; i<pIsInsideArray.length-2; i++) {
         if (pIsInsideArray[i] != pIsInsideArray[i+1]) { // whenever there is a switch from true to false or vise versa, the counter increases to the next section
             sectionCounter ++
         }
-        else sectionArray[sectionCounter]+=distanceTwoPoints(sectionArray[i], sectionArray[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
+        else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
-     return sectionArray // the filled array gets returned
-}
-
+    return sectionArray // the filled array gets returned
+}^^
