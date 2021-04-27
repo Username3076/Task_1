@@ -1,10 +1,10 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.1
+ * @version 1.6.2
  */
 
- main() //runner for main
+ main() // main methode
  function main() {
      
      var isInsideArray = createIsInsideArray(route, polygon)
@@ -35,6 +35,7 @@ function isPointInPolygon(pPoint, pPolygon){
     let y = pPoint[1] // lattidude
 
     for (var i = 0, j = pPolygon.length - 1; i < pPolygon.length; j = i++) { // I itterate trough the entire polygon
+        
         var xi = pPolygon[i][0] //longitude i
         var yi = pPolygon[i][1] //latitude  i
         var xj = pPolygon[j][0] //longitude j
@@ -43,6 +44,7 @@ function isPointInPolygon(pPoint, pPolygon){
     }
 
     if(((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)){    // now I check, whether an intersection between the polygon and the point exists. 
+        
         isInside = true                                                           // if so, I change our return to TRUE
     } 
 
@@ -115,8 +117,9 @@ function createSectionArray(pIsInsideArray){
             sections++
         }
     }
-    console.log(sections)
+
     var sectionArray = [0]
+
     for(let j = 0; j<sections;j++){       // new array is created and as big, as there are sections plus 1 to sum every entry up in the final array spot
         sectionArray.push(0)
     } 
@@ -159,7 +162,7 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
  * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
  * @function bubbleSort
  * @param {Array} distanceArray - the Array with the distances 
- * @returns {Array} distanceArray - the distanceArray gets returned but by the use of the bubblesort algorithm, it is now sorted
+ * @returns {Array} distanceArray - the distanceArray gets returned, but by the use of the bubblesort algorithm, it is now sorted
  */
 function bubble(distanceArray) {
     for (var i = 0; i < distanceArray.length; i++) {
