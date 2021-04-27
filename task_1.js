@@ -93,16 +93,16 @@ function distanceTwoPoints(point1, point2){
   */
  function createSectionArray(pIsInsideArray){
     
-    var sections = 1
+    var sections = 1 // this variable counts how many sections there are
     
-    for(let i=0; i<pIsInsideArray.length-2; i++) {
+    for(let i=0; i<pIsInsideArray.length-2; i++) {  // this loop iterates through the pIsInsideArray and inscreases the sections counter by one, whenever there is a switch from true to false or vise versa
         if (pIsInsideArray[i] != pIsInsideArray[i+1]) {
             sections++
         }
     }
     
-    var sectionArray = [sections]
+    var sectionArray = [sections] // new array is created and as big, as there are sections
     
-    return sectionArray
+    return sectionArray // the new array gets returned
  }
 
