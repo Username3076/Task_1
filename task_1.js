@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.4
+ * @version 1.6.5
  */
 
  main() // main methode
@@ -159,8 +159,8 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
 }
 
 /**
- * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
- * @function bubbleSort
+ * function "bubble" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
+ * @function bubble
  * @param {Array} distanceArray - the Array with the distances 
  * @returns {Array} distanceArray - the distanceArray gets returned, but by the use of the bubblesort algorithm, it is now sorted
  */
