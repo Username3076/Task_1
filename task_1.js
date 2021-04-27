@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.5
+ * @version 1.6.6
  */
 
  main() // main methode
@@ -16,7 +16,7 @@
      var distanceArray = createDistanceArray(sectionArray, route, isInsideArray)
      console.log(distanceArray)
 
-     var sortedDistanceArray = bubble(distanceArray)
+     var sortedDistanceArray = bubbleSort(distanceArray)
      console.log(sortedDistanceArray)
 
  }
@@ -159,19 +159,21 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
 }
 
 /**
- * function "bubble" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
- * @function bubble
+ * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
+ * @function bubbleSort
  * @param {Array} distanceArray - the Array with the distances 
  * @returns {Array} distanceArray - the distanceArray gets returned, but by the use of the bubblesort algorithm, it is now sorted
  */
-function bubble(distanceArray) {
-    for (var i = 0; i < distanceArray.length; i++) {
-      if (distanceArray[i] > distanceArray[i + 1]) {
-        var a = distanceArray[i]
-        var b = distanceArray[i + 1]
-        distanceArray[i] = b
-        distanceArray[i + 1] = a
-      }
+function bubbleSort(distanceArray){
+    let length = distanceArray.length;
+    for (let i = 0; i < length; i++) {
+        for (let j = 0; j < length; j++) {
+            if (distanceArray[j] > distanceArray[j + 1]) {
+                let tmp = distanceArray[j];
+                distanceArray[j] = distanceArray[j + 1];
+                distanceArray[j + 1] = tmp;
+            }
+        }
     }
     return distanceArray;
-  }
+}
