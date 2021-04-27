@@ -42,7 +42,7 @@ function isPointInPolygon(pPoint, pPolygon){
  * I used an algorithm, which is based on the haversine formula, that i found on the following webside:
  * https://www.movable-type.co.uk/scripts/latlong.html
  */
- function distanceTwoPoints(point1, point2){
+function distanceTwoPoints(point1, point2){
     
     const R = 6371e3; // this is the mean radius of the earth
 
@@ -63,3 +63,46 @@ function isPointInPolygon(pPoint, pPolygon){
 
     return distance // I return the calculated distance of our 2 points
  }
+
+ 
+
+ /**
+  * function "createIsInsideArray" creates an Array, which is as long as the original array of points, that was used for the route.
+  * In this Array every index is filled with the return of the "isInsidePolygon" function, so we can see for every point in the route, if it is inside or outside of the polygon.
+  * @function createIsInsideArray
+  * @param {Array} pRoute - the necessary points for our route, that are saved in an array
+  * @param {Array} pPolygon - the polygon, saved in an array
+  * @returns {Array} isInsideArray - the returned array
+  */
+ function createIsInsideArray(pRoute, pPolygon){
+     
+    var isInsideArray = [pRoute.length] // I create an array, which is as long as the route array
+
+    for(let i=0; i<pRoute.length-1; i++){   // I itterate through the entire length of the route array
+        isInsideArray[i] = isPointInPolygon(pRoute[i], pPolygon)    // I fill every index of the new array with true or false entries
+    }
+
+    return isInsideArray // das gefüllte array wird zurückgegeben
+ }
+
+ /**
+  * function "createSectionArray" is used to count, how many different sections between beeing inside and outside the polygon there are and to create an array with this exact size.
+  * @function createSectionArray
+  * @param {Array} pIsInsideArray - this array is taken from the function "createIsInsideArray" and used to count the sections 
+  * @returns {Array} sectionArray - this array is as big as there are sections
+  */
+ function createSectionArray(pIsInsideArray){
+    
+    var sections = 1
+    
+    for(let i=0; i<pIsInsideArray.length-2; i++) {
+        if (pIsInsideArray[i] != pIsInsideArray[i+1]) {
+            sections++
+        }
+    }
+    
+    var sectionArray = [sections]
+    
+    return sectionArray
+ }
+
