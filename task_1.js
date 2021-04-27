@@ -124,4 +124,4 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
         else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
     return sectionArray // the filled array gets returned
-}^^
+}
