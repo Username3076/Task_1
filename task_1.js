@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.3
+ * @version 1.6.4
  */
 
  main() // main methode
@@ -146,7 +146,7 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
         else sectionArray[sectionCounter]+=distanceTwoPoints(pRoute[i], pRoute[i+1])    // the section adds the distance it already has and the new distance that comes from "distanceTwoPoints"
      }
      
-     var sum = 0 // variable which has the sum of all entries in the sectionArray
+     var sum = 0 // variable which I use, to sum up all distances in the sectionArray
      
      for(let j = 0; j<sectionArray.length-1;j++){ // itterate through sectionArray and add every entry to sum
 
