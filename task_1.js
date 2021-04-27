@@ -4,6 +4,19 @@
  * @version 1.2.0
  */
 
+ main() //runner for main
+ function main() {
+     
+     var isInsideArray = createIsInsideArray(route, polygon)
+     console.log(isInsideArray)
+
+     var sectionArray = createSectionArray(isInsideArray)
+     console.log(sectionArray)
+
+     var distanceArray = createDistanceArray(sectionArray, route, isInsideArray)
+     console.log(distanceArray)
+
+ }
 
 /**
  * function "isPointInPolygon" to determine, whether a point is inside a polygon.
@@ -99,8 +112,11 @@ function createSectionArray(pIsInsideArray){
             sections++
         }
     }
-    
-    var sectionArray = [sections] // new array is created and as big, as there are sections
+    console.log(sections)
+    var sectionArray = [0]
+    for(let j = 0; j<sections-1;j++){       // new array is created and as big, as there are sections
+        sectionArray.push(0)
+    } 
     
     return sectionArray // the new array gets returned
 }
