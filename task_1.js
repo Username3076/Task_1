@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 
@@ -13,12 +13,12 @@
  */
 function isPointInPolygon(pPoint, pPolygon){
     
-    let isInside = false // our return is set to FALSE by default
+    let isInside = false // My return is set to FALSE by default
     
     let x = pPoint[0] // longitude
     let y = pPoint[1] // lattidude
 
-    for (var i = 0, j = in_polygon.length - 1; i < pPolygon.length; j = i++) { // we itterate trough the entire polygon
+    for (var i = 0, j = in_polygon.length - 1; i < pPolygon.length; j = i++) { // I itterate trough the entire polygon
         var xi = pPolygon[i][0] //longitude i
         var yi = pPolygon[i][1] //latitude  i
         var xj = pPolygon[j][0] //longitude j
@@ -26,9 +26,40 @@ function isPointInPolygon(pPoint, pPolygon){
 
     }
 
-    if(((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)){    // now we check, whether an intersection between the polygon and the point exists. 
-        isInside = true                                                           // if so, we change our return to TRUE
+    if(((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)){    // now I check, whether an intersection between the polygon and the point exists. 
+        isInside = true                                                           // if so, I change our return to TRUE
     } 
 
-    return isInside   // we return our result.
+    return isInside   // I return the result.
 }
+
+/**
+ * function "distanceTwoPoints" calculates the distance between two given points.
+ * @function distanceTwoPoints
+ * @param {Array} point1 - point1 
+ * @param {Array} point2 - point2
+ * @return {float} distance - I return the distance in meters
+ * I used an algorithm, which is based on the haversine formula, that i found on the following webside:
+ * https://www.movable-type.co.uk/scripts/latlong.html
+ */
+ function distanceTwoPoints(point1, point2){
+    
+    const R = 6371e3; // this is the mean radius of the earth
+
+    var lat1 = point1[1] // latitude of point1
+    var lon1 = point1[0] // longitude of point1
+    var lat2 = point2[1] // latitude of point2
+    var lon2 = point2[0] // longitude of point2
+    
+    const phi1 = lat1 * Math.PI/180      // now i multiplicate our latitudes of Point1 and Point2, 
+    const phi2 = lat2 * Math.PI/180      // to change the square measure, so i can use trigonomic functions on the them.
+
+    const deltaPhi = (lat2-lat1) * Math.PI/180    // deltaPhi is the difference of the lattitudes of our 2 points
+    const deltaLambda = (lon2-lon1) * Math.PI/180     // deltaLambda is the difference of the longitudes of our 2 points
+    
+    const a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2); // we use our variables to put them in the haversine formula
+    const b = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a))  // now we use our calculated const a to put it in the next step of the haversine formula
+    const distance = R * b // in the end, we use our const b and multiply it with the earth`s radius to get the distance of our two points
+
+    return distance // I return the calculated distance of our 2 points
+ }
