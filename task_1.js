@@ -1,7 +1,7 @@
 /**
  * 
  * @author @Username3076 Luca
- * @version 1.6.6
+ * @version 1.6.7
  */
 
  main() // main methode
@@ -159,7 +159,8 @@ function createDistanceArray(sectionArray, pRoute, pIsInsideArray){
 }
 
 /**
- * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm
+ * function "bubbleSort" is needed to sort the array. bubbleSort works like the bubbleSort algorithm, that i found on this website:
+ * https://medium.com/javascript-algorithms/javascript-algorithms-bubble-sort-3d27f285c3b2
  * @function bubbleSort
  * @param {Array} distanceArray - the Array with the distances 
  * @returns {Array} distanceArray - the distanceArray gets returned, but by the use of the bubblesort algorithm, it is now sorted
