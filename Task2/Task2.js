@@ -196,3 +196,4 @@ function bubbleSort(distanceArray){
     }
     return distanceArray;
 }
+
