@@ -8,21 +8,33 @@
  // main methode
  function main() {
 
+    console.log(route)
+
     var defaultRoute = parseArrayToGeoJSON(route)
 
+    console.log(defaultRoute)
+
+
     var inputRoute = checkGeoJSON(defaultRoute)
+
+    console.log(inputRoute)
 
     estimateRouteDistance(inputRoute)
  }
 
- function estimateRouteDistance(inputRoute){
+function estimateRouteDistance(inputRoute){
+
+    console.log(inputRoute)
 
      var polygonGeoJSON = parseArrayToGeoJSON(polygon)
+     console.log(polygonGeoJSON)
 
      var polygonNew = checkGeoJSON(polygonGeoJSON)
+     console.log(polygonNew)
      
      var isInsideArray = createIsInsideArray(inputRoute, polygonNew)
      console.log(isInsideArray)
+
 
      var sectionArray = createSectionArray(isInsideArray)
      console.log(sectionArray)
@@ -123,6 +135,8 @@ function createIsInsideArray(pRoute, pPolygon){
  * @returns {Array} sectionArray - this array is as big as there are sections
  */
 function createSectionArray(pIsInsideArray){
+
+    console.log(pIsInsideArray)
     
     var sections = 1 // this variable counts how many sections there are
     
@@ -132,6 +146,7 @@ function createSectionArray(pIsInsideArray){
             sections++
         }
     }
+    console.log(sections)
 
     var sectionArray = [0]
 
@@ -218,12 +233,16 @@ function receiveGEOJSON() {
     try {
         var lineString = document.getElementById("input").value // I create a variable, which saves the input of the HTML.input
 
+        console.log(lineString)
+        
         var parsedLineString = JSON.parse(lineString) // I create a variable, which parses the input "lineString", we just saved into JSON.
 
-        if(checkgeojson(parsedLineString)){ //  I check, whether the input file is a GeoJSON and if it contains at least one LineString
+        console(parsedLineString)
+        
+        newRoute = checkGeoJSON(parsedLineString) //  I check, whether the input file is a GeoJSON and if it contains at least one LineString
             
-            estimateRouteDistance(newRoute)
-        } // I calculate the distance of the newRoute, just like in Task 1
+        estimateRouteDistance(newRoute)
+         // I calculate the distance of the newRoute, just like in Task 1
 
     } catch (error) {
         window.alert("please check again, if you inserted a GeoJSON") // the user gets an alert, when he made a wrong input
@@ -266,29 +285,57 @@ function checkGeoJSON(parsed_GeoJSON) {
 }
 
 /**
- * 
+ * // this method is needed to parse an array into an GeoJSON-format
  * @function "parseArrayToGeoJSON"
  * @param {array} - defRoute - this is either our default polygon, or the default route
  */
 function parseArrayToGeoJSON(defRoute){
-    var geojson
-    // in case of polygone the first and the last coordinate are identical
-    if(default_array[0][0] == default_array[default_array.length-1][0] && default_array[0][1] == default_array[default_array.length-1][1]) {
-        // create an String formatted as an GeoJson polygon by concatenation
-        var default_polygon = '{' + '"type": "Polygon",' + '"coordinates": [[' + default_array + ']]}'
-        // parsing the String
-        geojson = JSON.parse(default_polygon)
-        console.log(geojson)
+
+    var geoJSON
+    
+    if(defRoute[0][0] == defRoute[defRoute.length-1][0] && defRoute[0][1] == defRoute[defRoute.length-1][1]) { // Here I check, whether defRoute is a Polygon
+       
+        var polygonDefault = '{' + '"type": "Polygon",' + '"coordinates": [[' + arrayToString(defRoute) + ']]}' // If defRoute is a polygon, the new var polygonDefault is build like a GeoJSON and takes the coordinates of defRoute
+
+        console.log(polygonDefault)
+        
+        geoJSON = JSON.parse(polygonDefault)
+
+        console.log(geoJSON)
     }
-    // other inpits are interpreted as lines
+    
     else {
-        // create an String formatted as an GeoJson polygon by concatenation
-        var default_route = '{' + '"type": "LineString",' + '"coordinates": [' + default_array + ']}'
-        // this is parsing the String, so we can handle it as a real geojson
-        geojson = JSON.parse(default_route)
-        console.log(geojson)
+       
+        var routeDefault = '{' + '"type": "LineString",' + '"coordinates": [' + arrayToString(defRoute) + ']}' // If defRoute is a LineString, the new var routeDefault is build like a GeoJSON and takes the coordinates of defRoute
+
+        console.log(routeDefault)
+    
+        geoJSON = JSON.parse(routeDefault)
+
+        console.log(geoJSON)
     }
-    return geojson;
+    return geoJSON;
+}
+
+
+/**
+ * this method is needed to transform the lineString into the right format for a GeoJSON
+ * @function arrayToString
+ * @param {array} array 
+ * @returns 
+ */
+function arrayToString(array) {
+
+    var string = '[' + array[0] + '],';
+
+    for (var i = 1; i < array.length-1; i++) {
+
+        string = string + '[' + array[i] + '],'
+
+    }
+    string = string + '[' + array[array.length-1] + ']'
+
+    return string;
 }
 
 
