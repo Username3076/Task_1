@@ -2,7 +2,7 @@
  * 
  * 
  * @author @Username3076 Luca
- * @version 1.9.3
+ * @version 1.9.4
  */
 
  // main methode
@@ -295,7 +295,7 @@ function parseArrayToGeoJSON(defRoute){
     
     if(defRoute[0][0] == defRoute[defRoute.length-1][0] && defRoute[0][1] == defRoute[defRoute.length-1][1]) { // Here I check, whether defRoute is a Polygon
        
-        var polygonDefault = '{' + '"type": "Polygon",' + '"coordinates": [[' + arrayToString(defRoute) + ']]}' // If defRoute is a polygon, the new var polygonDefault is build like a GeoJSON and takes the coordinates of defRoute
+        var polygonDefault = '{' + '"type": "Polygon",' + '"coordinates": [[' + parseArrayToString(defRoute) + ']]}' // If defRoute is a polygon, the new var polygonDefault is build like a GeoJSON and takes the coordinates of defRoute
 
         console.log(polygonDefault)
         
@@ -306,7 +306,7 @@ function parseArrayToGeoJSON(defRoute){
     
     else {
        
-        var routeDefault = '{' + '"type": "LineString",' + '"coordinates": [' + arrayToString(defRoute) + ']}' // If defRoute is a LineString, the new var routeDefault is build like a GeoJSON and takes the coordinates of defRoute
+        var routeDefault = '{' + '"type": "LineString",' + '"coordinates": [' + parseArrayToString(defRoute) + ']}' // If defRoute is a LineString, the new var routeDefault is build like a GeoJSON and takes the coordinates of defRoute
 
         console.log(routeDefault)
     
@@ -320,11 +320,11 @@ function parseArrayToGeoJSON(defRoute){
 
 /**
  * this method is needed to transform the lineString into the right format for a GeoJSON
- * @function arrayToString
+ * @function parseArrayToString
  * @param {array} array 
  * @returns 
  */
-function arrayToString(array) {
+function parseArrayToString(array) {
 
     var string = '[' + array[0] + '],';
 
