@@ -7,6 +7,11 @@
 
  // main methode
  function main() {
+
+    estimateRouteDistance(route)
+ }
+
+ function estimateRouteDistance(route){
      
      var isInsideArray = createIsInsideArray(route, polygon)
      console.log(isInsideArray)
@@ -19,6 +24,8 @@
 
      var sortedDistanceArray = bubbleSort(distanceArray)
      console.log(sortedDistanceArray)
+
+    }
 
  }
 
@@ -206,12 +213,38 @@ function receiveGEOJSON() {
 
         var parsedLineString = JSON.parse(lineString) // I create a variable, which parses the input "lineString", we just saved into JSON.
 
-        if(checkgeojson(parsedLineString)) //  I check, whether the input file is a GeoJSON and if it contains at least one LineString
-
-        estimateRouteDistance(newRoute) // I calculate the distance of the newRoute, just like in Task 1
+        if(checkgeojson(parsedLineString)){ //  I check, whether the input file is a GeoJSON and if it contains at least one LineString
+            
+            estimateRouteDistance(newRoute)
+        } // I calculate the distance of the newRoute, just like in Task 1
 
     } catch (error) {
         window.alert("please check again, if you inserted a GeoJSON") // the user gets an alert, when he made a wrong input
+    }
+}
+
+function checkGeoJSON(parsed_GeoJSON) {
+
+    var newRoute
+    
+    if (parsed_GeoJSON.type == "FeatureCollection") {
+         
+        newRoute = parsed_GeoJSON.features[0].geometry.coordinates
+        
+         return newRoute
+
+    } else {
+
+        if (parsed_GeoJSON.type == "LineString") {
+           
+            newRoute = parsed_GeoJSON.coordinates
+            
+            return newRoute
+            
+        } else {
+            console.log("false input")
+            return false
+        } 
     }
 }
 
