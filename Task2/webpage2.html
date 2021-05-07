@@ -26,6 +26,18 @@
                     <th>Inside / Outside</th>
                 </tr>
             </table>
+
+            <p> on this page you can create your own FeatureCollection, please make sure, that you have at least one lineString in your collection <p>
+                <a href="https://geojson.io/" target="_blank"> </a>
+                
+                <p> please insert your FeatureCollection in this field </p>
+                <textarea id="textField" rows="6" cols="40"></textarea>
+                
+                <p> press this button, to input and run your created route </p> 
+                <button type="button" onclick="get_input()">custom run</button>
+
+                <p> press this button, to run the default route </p> 
+                <button type="button" onclick="main()">default run</button>
             
             <script>
 
