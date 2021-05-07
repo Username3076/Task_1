@@ -5,7 +5,7 @@
  * @version 1.6.8
  */
 
- main() // main methode
+ // main methode
  function main() {
      
      var isInsideArray = createIsInsideArray(route, polygon)
@@ -196,4 +196,23 @@ function bubbleSort(distanceArray){
     }
     return distanceArray;
 }
+
+/**
+ * function "receiveGEOJSON" takes an input from the HTML page and checks, whether the input is a GeoJSON and calculates the distance of the different parts, like in Task 1
+ */
+function receiveGEOJSON() {
+    try {
+        var lineString = document.getElementById("input").value // I create a variable, which saves the input of the HTML.input
+
+        var parsedLineString = JSON.parse(lineString) // I create a variable, which parses the input "lineString", we just saved into JSON.
+
+        if(checkgeojson(parsedLineString)) //  I check, whether the input file is a GeoJSON and if it contains at least one LineString
+
+        estimateRouteDistance(newRoute) // I calculate the distance of the newRoute, just like in Task 1
+
+    } catch (error) {
+        window.alert("please check again, if you inserted a GeoJSON") // the user gets an alert, when he made a wrong input
+    }
+}
+
 
