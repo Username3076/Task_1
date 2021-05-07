@@ -27,7 +27,6 @@
 
     }
 
- }
 
 /**
  * function "isPointInPolygon" to determine, whether a point is inside a polygon.
@@ -223,29 +222,40 @@ function receiveGEOJSON() {
     }
 }
 
+
+/**
+ * function "checkGEOJSON", helps to finde out, whether "parsed_GeoJSON" is an actuall GeoJSON object or not
+ * @param {GeoJSON} parsed_GeoJSON 
+ * @returns 
+ */
 function checkGeoJSON(parsed_GeoJSON) {
 
-    var newRoute
+    var newRoute // this is our return, if "parsed_GeoJSON" turns out to be an GeoJSON object and saves their coordinates
     
-    if (parsed_GeoJSON.type == "FeatureCollection") {
+    if (parsed_GeoJSON.type == "FeatureCollection") { // Here I check, whether the input is a FeatureCollection
          
         newRoute = parsed_GeoJSON.features[0].geometry.coordinates
+
+                                                    // the coordinates of "parsed_GeoJSON" gets saves in "newRoute"
         
          return newRoute
 
     } else {
 
-        if (parsed_GeoJSON.type == "LineString") {
+        if (parsed_GeoJSON.type == "LineString") {  // Here I check, whether the input is a LineString
            
             newRoute = parsed_GeoJSON.coordinates
-            
+                                                    // the coordinates of "parsed_GeoJSON" gets saves in "newRoute"
             return newRoute
-            
+
         } else {
-            console.log("false input")
+
+            console.log("false input")              // the user gets informed, that he made a wrong input
             return false
         } 
     }
 }
+
+
 
 
